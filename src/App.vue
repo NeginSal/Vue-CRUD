@@ -1,18 +1,14 @@
 <template>
-
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
-
 export default {
-  components:{
- 
-  }
-}
+  components: {},
+};
 </script>
 <style>
-body{
+body {
   background-color: #f2f2f2;
 }
 #app {
@@ -23,5 +19,4 @@ body{
   margin: 0 auto;
   color: #2c3e50;
 }
-
 </style>
