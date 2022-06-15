@@ -1,26 +1,29 @@
 <template>
   <div class="home">
-    <div v-if="user.length">
-      <div v-for="item in user" :key="item.token">
-        <p>{{item.username}}</p>
+    <div v-if="users.length">
+      <div v-for="user in users" :key="user.token">
+        <SingleUser :user="user"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SingleUser from "../components/SingleUser";
 export default {
   name: "Home",
-  components: {},
+  components: {
+    SingleUser,
+  },
   data() {
     return {
-      user: [],
+      users: [],
     };
   },
   mounted() {
-    fetch("http://localhost:3000/user")
+    fetch("http://localhost:3000/users")
       .then((res) => res.json())
-      .then((data) => (this.user = data))
+      .then((data) => (this.users = data))
       .catch((err) => console.log(err.message));
   },
 };
