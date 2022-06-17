@@ -27,9 +27,9 @@ export default {
       .catch((err) => console.log(err.message));
   },
   methods: {
-    handleDelete() {
+    handleDelete(id) {
       this.users = this.users.filter((user) => {
-        return project.id !== id; 
+        return user.id !== id; 
       });
     },
   },

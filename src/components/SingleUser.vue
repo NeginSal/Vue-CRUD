@@ -10,7 +10,7 @@
     </div>
     <div v-if="showDetails">
       <p>{{ user.email }}</p>
-      <p>{{ user.bio }}</p>
+      <!-- <p>{{ user.bio }}</p> -->
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   methods: {
     deleteUser() {
       fetch(this.uri,{methods:'DELETE'})
-      .then(()=>this.$emit('delete',this.project.id))
+      .then(()=>this.$emit('delete',this.user.id))
       .catch(err=>console.log(err))
     },
   },
