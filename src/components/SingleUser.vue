@@ -1,9 +1,14 @@
 <template>
   <div class="users">
     <div class="actions">
-      <h3 @click="showDetails=!showDetails">{{ user.username }}</h3>
+      <h3 @click="showDetails = !showDetails">{{ user.username }}</h3>
+      <div class="icons">
+        <span class="material-icons">edit</span>
+
+        <span @click="deleteUser" class="material-icons">delete</span>
+      </div>
     </div>
-    <div v-if="showDetails" >
+    <div v-if="showDetails">
       <p>{{ user.email }}</p>
       <p>{{ user.bio }}</p>
     </div>
@@ -12,13 +17,20 @@
 
 <script>
 export default {
+  props: ["user"],
   data() {
     return {
       showDetails: false,
+      uri:'http://localhost:3000/users'+this.user.id
     };
   },
-  props: ["user"],
-
+  methods: {
+    deleteUser() {
+      fetch(this.uri,{methods:'DELETE'})
+      .then(()=>this.$emit('delete',this.project.id))
+      .catch(err=>console.log(err))
+    },
+  },
 };
 </script>
 
@@ -34,5 +46,19 @@ export default {
 }
 h3 {
   cursor: pointer;
+}
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.material-icons {
+  font-size: 24px;
+  margin-left: 10px;
+  color: #bbb;
+  cursor: pointer;
+}
+.material-icons:hover {
+  color: #777;
 }
 </style>

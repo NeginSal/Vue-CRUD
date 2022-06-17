@@ -2,7 +2,7 @@
   <div class="home">
     <div v-if="users.length">
       <div v-for="user in users" :key="user.token">
-        <SingleUser :user="user"/>
+        <SingleUser :user="user" @delete="handleDelete" />
       </div>
     </div>
   </div>
@@ -25,6 +25,13 @@ export default {
       .then((res) => res.json())
       .then((data) => (this.users = data))
       .catch((err) => console.log(err.message));
+  },
+  methods: {
+    handleDelete() {
+      this.users = this.users.filter((user) => {
+        return project.id !== id; 
+      });
+    },
   },
 };
 </script>
