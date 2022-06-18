@@ -1,11 +1,11 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <label>UserName:</label>
-    <input type="text" required v-model="username" />
-    <label>Email:</label>
+    <label>Name</label>
+    <input type="text" required v-model="name" />
+    <div v-if="NameError" class="error">{{ NameError }}</div>
+    <label>Email</label>
     <input required v-model="email" />
-    <label>Password:</label>
-    <input type="password" required v-model="password" />
+    <div v-if="EmailError" class="error">{{ EmailError }}</div>
     <button>Add User</button>
   </form>
 </template>
@@ -14,27 +14,39 @@
 export default {
   data() {
     return {
-      username: "",
+      name: "",
       email: "",
-      password:""
+      NameError: "",
+      EmailError: "",
     };
   },
   methods: {
     handleSubmit() {
-      let user = {
-        username: this.username,
-        email: this.email,
-        password:this.password
-      };
-      fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      })
-        .then(() => {
-          this.$router.push("/");
+      if (!this.NameError && !this.EmailError) {
+        this.NameError =
+          this.name.length > 3
+            ? ""
+            : ".نام وارد شده باید حداقل ۳ حرف داشته باشد";
+        this.EmailError =
+          this.email.length > 5
+            ? ""
+            : ".ایمیل وارد شده باید حداقل ۵ حرف داشته باشد";
+      } else {
+        let user = {
+          name: this.name,
+          email: this.email,
+        };
+
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
         })
-        .catch((err) => console.log(err));
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch((err) => console.log(err));
+      }
     },
   },
 };
@@ -62,13 +74,6 @@ input {
   width: 100%;
   box-sizing: border-box;
 }
-textarea {
-  border: 1px solid #ddd;
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  height: 100px;
-}
 form button {
   display: block;
   margin: 20px auto 0;
@@ -78,5 +83,11 @@ form button {
   border: 0;
   border-radius: 6px;
   font-size: 16px;
+}
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 </style>

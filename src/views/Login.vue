@@ -1,10 +1,10 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form>
+    <label>Name:</label>
+    <input type="text" required v-model="name" />
     <label>Email:</label>
     <input required v-model="email" />
-    <label>Password:</label>
-    <input type="password" required v-model="password" />
-    <button>Add User</button>
+    <button @click="login">Add Project</button>
   </form>
 </template>
 
@@ -12,25 +12,13 @@
 export default {
   data() {
     return {
+      name: "",
       email: "",
-      password:""
     };
   },
   methods: {
-    handleSubmit() {
-      let user = {
-        email: this.email,
-        password:this.password
-      };
-      fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      })
-        .then(() => {
-          this.$router.push("/");
-        })
-        .catch((err) => console.log(err));
+    login() {
+      this.$router.push("/");
     },
   },
 };
@@ -58,13 +46,7 @@ input {
   width: 100%;
   box-sizing: border-box;
 }
-textarea {
-  border: 1px solid #ddd;
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  height: 100px;
-}
+
 form button {
   display: block;
   margin: 20px auto 0;

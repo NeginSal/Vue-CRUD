@@ -1,16 +1,17 @@
 <template>
-  <div class="users">
+  <div class="project">
     <div class="actions">
-      <h3 @click="showDetails = !showDetails">{{ user.username }}</h3>
+      <h3 @click="showDetails = !showDetails">{{ user.name }}</h3>
       <div class="icons">
-        <span class="material-icons">edit</span>
-
-        <span @click="deleteUser" class="material-icons">delete</span>
+        <router-link :to="{ name: 'EditUser', params: { id: user.id } }">
+          <span class="material-icons">edit</span>
+        </router-link>
+        <span @click="deleteProject" class="material-icons">delete</span>
       </div>
     </div>
-    <div v-if="showDetails">
+    <div v-if="showDetails" class="details">
+      <p>{{ user.username }}</p>
       <p>{{ user.email }}</p>
-      <!-- <p>{{ user.bio }}</p> -->
     </div>
   </div>
 </template>
@@ -21,28 +22,26 @@ export default {
   data() {
     return {
       showDetails: false,
-      uri:'http://localhost:3000/users'+this.user.id
+      uri: "http://localhost:3000/users/" + this.user.id,
     };
   },
   methods: {
-    deleteUser() {
-      fetch(this.uri,{methods:'DELETE'})
-      .then(()=>this.$emit('delete',this.user.id))
-      .catch(err=>console.log(err))
+    deleteProject() {
+      fetch(this.uri, { method: "DELETE" })
+        .then(() => this.$emit("delete", this.user.id))
+        .catch((err) => console.log(err));
     },
   },
 };
 </script>
 
-
 <style scoped>
-.users {
+.project {
   margin: 20px auto;
   background: white;
   padding: 10px 20px;
   border-radius: 4px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.05);
-  border-left: 4px solid #e90074;
 }
 h3 {
   cursor: pointer;
@@ -61,4 +60,6 @@ h3 {
 .material-icons:hover {
   color: #777;
 }
+
+
 </style>
