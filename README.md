@@ -1,19 +1,21 @@
 # vue
 
-## Project setup
+## 1.Project setup
 ```
 npm install
 ```
+## 2.install json-server : 
+```
+npm i json-server
+```
 
-### Compiles and hot-reloads for development
+## 3.run json-server : 
+```
+json-server --watch db.json
+```
+
+## 4.open another terminal and run this command:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
