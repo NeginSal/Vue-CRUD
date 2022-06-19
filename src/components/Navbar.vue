@@ -1,30 +1,29 @@
 <template>
   <nav class="main-nav">
     <router-link :to="{ name: 'Home' }">Users</router-link>
-    <router-link :to="{ name: 'AddUser' }">Add a New User</router-link>
-    <router-link :to="{ name: 'Login' }">Login</router-link>
+    <router-link :to="{ name: 'AddUser' }">Sign up</router-link>
+    <router-link :to="{ name: 'Login' }">Sign in</router-link>
   </nav>
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style>
-  .main-nav {
-    text-align: center;
-    margin: 40px auto;
-  }
-  .main-nav a{
-    display: inline-block;
-    text-decoration: none;
-    margin: 0 10px;
-    color: #999;
-    font-size: 18px;
-  }
-  a.router-link-active {
-    border-bottom: 2px solid #00ce89;
-    padding-bottom: 4px;
-  }
+.main-nav {
+  text-align: center;
+  margin: 40px auto;
+}
+.main-nav a {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 10px;
+  color: #999;
+  font-size: 18px;
+}
+a.router-link-active {
+  border-bottom: 2px solid #00ce89;
+  padding-bottom: 4px;
+}
 </style>

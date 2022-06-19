@@ -12,6 +12,8 @@
     <div v-if="showDetails" class="details">
       <p>{{ user.username }}</p>
       <p>{{ user.email }}</p>
+      <p>{{ user.token }}</p>
+      <p>{{ user.bio }}</p>
     </div>
   </div>
 </template>
@@ -60,6 +62,4 @@ h3 {
 .material-icons:hover {
   color: #777;
 }
-
-
 </style>

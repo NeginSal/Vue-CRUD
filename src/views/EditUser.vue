@@ -18,7 +18,7 @@ export default {
       uri: "http://localhost:3000/users/" + this.id,
       name: "",
       username: "",
-      email: ""
+      email: "",
     };
   },
   mounted() {

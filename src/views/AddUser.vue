@@ -4,8 +4,11 @@
     <input type="text" required v-model="name" />
     <div v-if="NameError" class="error">{{ NameError }}</div>
     <label>Email</label>
-    <input required v-model="email" />
+    <input required type="text" v-model="email" />
     <div v-if="EmailError" class="error">{{ EmailError }}</div>
+    <label>Password</label>
+    <input required v-model="password" type="password" />
+    <div v-if="PasswordError" class="error">{{ PasswordError }}</div>
     <button>Add User</button>
   </form>
 </template>
@@ -16,26 +19,32 @@ export default {
     return {
       name: "",
       email: "",
+      password: "",
       NameError: "",
       EmailError: "",
+      PasswordError: "",
     };
   },
   methods: {
     handleSubmit() {
-      if (!this.NameError && !this.EmailError) {
-        this.NameError =
-          this.name.length > 3
-            ? ""
-            : ".نام وارد شده باید حداقل ۳ حرف داشته باشد";
-        this.EmailError =
-          this.email.length > 5
-            ? ""
-            : ".ایمیل وارد شده باید حداقل ۵ حرف داشته باشد";
-      } else {
+      this.NameError =
+        this.name.length > 3 ? "" : ".نام وارد شده باید حداقل ۳ حرف داشته باشد";
+      this.EmailError =
+        this.email.length > 5
+          ? ""
+          : ".ایمیل وارد شده باید حداقل ۵ حرف داشته باشد";
+      this.PasswordError =
+        this.password.length > 8
+          ? ""
+          : ".رمز وارد شده باید حداقل ۸ رقم داشته باشد";
+      let flag = this.NameError || this.EmailError || this.PasswordError;
+      if (!flag) {
         let user = {
           name: this.name,
           email: this.email,
+          password: this.password,
         };
+        console.log(user);
 
         fetch("http://localhost:3000/users", {
           method: "POST",

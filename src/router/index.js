@@ -20,7 +20,7 @@ const routes = [
     path: '/users/:id',
     name: 'EditUser',
     component: EditUser,
-    props:true
+    props: true
   },
   {
     path: '/login',
